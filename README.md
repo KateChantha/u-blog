@@ -1,1 +1,1 @@
-### This is a World SEO Web Applications using React Node Mongo DB and NextJs.
+### This is a SEO Web Applications using React Node Mongo DB and NextJs.
