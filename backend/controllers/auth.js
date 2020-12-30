@@ -75,3 +75,25 @@ exports.signin = (req, res) => {
       });
   });
 };
+
+/**
+ * step 1. clear cookies
+ * step 2. reponse to client with message
+ */
+exports.signout = (req, res) => {
+  res.clearCookie('token');
+  res.json({
+      message: 'Signout success'
+  });
+};
+
+/**
+ * Middle ware to be apply to any protected route route 
+ * step 2. compare with secret that is in .env file
+ * step 3. expressJwt give UnauthorizedError: No authorization token was found
+ */
+exports.requireSignin = expressJwt({
+  secret: process.env.JWT_SECRET, // req.user
+  algorithms: ["HS256"], // added later
+  userProperty: "auth",
+});
