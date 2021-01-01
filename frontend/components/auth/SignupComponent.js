@@ -1,13 +1,25 @@
-import { Fragment } from 'react';
+import { useState, Fragment } from 'react';
 
 const SignupComponent = () => {
+  const [values, setValues] = useState({
+    name: 'guest',
+    email: 'guest@gmail.com',
+    password: 'gggggg',
+    error: '',
+    loading: false,
+    message: '',
+    showForm: true
+  })
+
+  const { name, email, password, error, loading, message, showForm } = values;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("handle submit")
+    console.table({ name, email, password, error, loading, message, showForm });
   }
   
-  const handleChange = (e) => {
-    console.log(e.target.value)
+  const handleChange = type => (e) => {
+    setValues({ ...values, error: false, [type]: e.target.value });
   };
   
   const signupForm = () => {
@@ -15,7 +27,8 @@ const SignupComponent = () => {
       <form onSubmit={ handleSubmit }>
         <div className="form-group">
           <input 
-            onChange={ handleChange }
+            value={name}
+            onChange={ handleChange('name') }
             type="text" 
             className="form-control" 
             placeholder="Type your name"
@@ -23,15 +36,17 @@ const SignupComponent = () => {
         </div>
         <div className="form-group">
           <input 
-            onChange={ handleChange }
-            type="emailt" 
+            value={email}
+            onChange={ handleChange('email') }
+            type="email" 
             className="form-control" 
             placeholder="Type your email"
           />
         </div>
         <div className="form-group">
           <input 
-            onChange={ handleChange }
+            value={password}
+            onChange={ handleChange('password') }
             type="password" 
             className="form-control" 
             placeholder="Type your password"
