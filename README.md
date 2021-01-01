@@ -1,1 +1,1 @@
-### This is a SEO Web Applications using React Node Mongo DB and NextJs.
+### Ublog is a SEO Web Applications using React Node Mongo DB and NextJs.
