@@ -1,4 +1,5 @@
 import { useState, Fragment } from 'react';
+import { signup } from '../../actions/auth';
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
@@ -12,10 +13,34 @@ const SignupComponent = () => {
   })
 
   const { name, email, password, error, loading, message, showForm } = values;
-
+  /**
+   * step 1. setValues from user form input
+   * step 2. send user data to backend server
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.table({ name, email, password, error, loading, message, showForm });
+    // console.table({ name, email, password, error, loading, message, showForm });
+    setValues({ ...values, loading: true, error: false });
+    // read variable name, email, password and store in user
+    const user = { name, email, password };
+
+    signup(user).then(data => {
+      if (data.error) {
+          setValues({ ...values, error: data.error, loading: false });
+      } else {
+        setValues({
+            ...values,
+            name: '',
+            email: '',
+            password: '',
+            error: '',
+            loading: false,
+            message: data.message,
+            // disable the form after successfully signup
+            showForm: false
+        });
+      }
+    });
   }
   
   const handleChange = type => (e) => {
