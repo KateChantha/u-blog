@@ -21,7 +21,8 @@ mongoose
 mongoose.connection.on("error", err => {
         console.log(`DB connection error: ${err.message}`);
     });
-
+    
+app.use(cors())
 // middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());

@@ -44,8 +44,18 @@ const SignupComponent = () => {
   }
   
   const handleChange = type => (e) => {
-    setValues({ ...values, error: false, [type]: e.target.value });
+    setValues({ 
+      ...values, 
+      // hide an error when user start to fill out form again
+      error: false, 
+      // type of input
+      [type]: e.target.value 
+    });
   };
+
+  const showLoading = () => (loading? <div className="alert alert-info">Loading...</div> : "");
+  const showError = () => (error? <div className="alert alert-danger">.{error}</div> : "");
+  const showMessage = () => (message? <div className="alert alert-info">{message}</div> : "");
   
   const signupForm = () => {
     return (
@@ -86,7 +96,10 @@ const SignupComponent = () => {
 
   return (
     <Fragment>
-      { signupForm() }
+      { showError() }
+      { showLoading() }
+      { showMessage() }
+      { showForm && signupForm() }
     </Fragment>
     
   )
