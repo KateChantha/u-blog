@@ -28,8 +28,23 @@ export const signin = user => {
         .catch(err => console.log(err));
   };
 
+export const signout = next => {
+    removeCookie('token');
+    removeLocalStorage('user');
+    next();
+
+    // then make a request to server
+    return fetch(`${API}/signout`, {
+        method: 'GET'
+    })
+        .then(response => {
+            console.log('signout success');
+        })
+        .catch(err => console.log(err));
+};
+
 // set cookie 
-//- set name ass in as key
+//- set name ass in as key 
 //- pass the tocken to cookie and save
 export const setCookie = (key, value) => {
     // check to make sure that we're runing in 
