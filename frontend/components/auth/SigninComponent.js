@@ -1,6 +1,6 @@
 import Router from 'next/router';
-import { useState, Fragment } from 'react';
-import { signin, authenticate } from '../../actions/auth';
+import { useState, useEffect, Fragment } from 'react';
+import { signin, authenticate, isAuth } from '../../actions/auth';
 
 const SigninComponent = () => {
   const [values, setValues] = useState({
@@ -13,6 +13,12 @@ const SigninComponent = () => {
   })
 
   const { email, password, error, loading, message, showForm } = values;
+
+  // if user are status still signin, redirect to home page
+  useEffect(() => {
+    isAuth() && Router.push(`/`);
+  },[]);
+
   /**
    * step 1. setValues from user form input
    * step 2. if successful signin, redirect user to home page(for now)

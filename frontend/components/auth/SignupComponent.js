@@ -1,5 +1,6 @@
-import { useState, Fragment } from 'react';
-import { signup } from '../../actions/auth';
+import { useState, useEffect, Fragment } from 'react';
+import Router from 'next/router';
+import { signup, isAuth } from '../../actions/auth';
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
@@ -13,6 +14,12 @@ const SignupComponent = () => {
   })
 
   const { name, email, password, error, loading, message, showForm } = values;
+
+  // if user are status still signin, it will keep redirect to home page
+  useEffect(() => {
+    isAuth() && Router.push(`/`);
+  },[]);
+
   /**
    * step 1. setValues from user form input
    * step 2. send user data to backend server
