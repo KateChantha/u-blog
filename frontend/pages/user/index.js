@@ -1,11 +1,14 @@
 import Link from 'next/link';
+import Private from '../../components/auth/Private';
 import Layout from '../../components/Layout';
 
 
 const UserIndex = () => {
   return (
     <Layout>
-      <h2>User Dashboard</h2>
+      <Private>
+        <h2>User Dashboard</h2>
+      </Private>
     </Layout>
   )
 }
