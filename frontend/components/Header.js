@@ -27,21 +27,37 @@ const Header = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
 
-          {!isAuth() && (
-            <Fragment>
-              <NavItem>
-                <Link href="/signin">
-                  <NavLink>Signin</NavLink>
-                </Link>
-              </NavItem>
-              <NavItem>    
-                  <Link href="/signup">
-                    <NavLink>Signup</NavLink>
+            {!isAuth() && (
+              <Fragment>
+                <NavItem>
+                  <Link href="/signin">
+                    <NavLink>Signin</NavLink>
                   </Link>
-              </NavItem>
-            </Fragment>
-          )}
-           
+                </NavItem>
+                <NavItem>    
+                    <Link href="/signup">
+                      <NavLink>Signup</NavLink>
+                    </Link>
+                </NavItem>
+              </Fragment>
+            )}
+
+            {isAuth() && isAuth().role === 0 && (
+               <NavItem>    
+                  <Link href="/user">
+                  <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
+                </Link>
+            </NavItem>
+            )}
+
+            {isAuth() && isAuth().role === 1 && (
+               <NavItem>    
+                  <Link href="/admin">
+                  <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
+                </Link>
+            </NavItem>
+            )}
+
             {isAuth() && (
                <NavItem>    
                   <NavLink
