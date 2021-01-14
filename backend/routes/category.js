@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { create } = require('../controllers/category');
+const { create, list, read, remove } = require('../controllers/category');
 
 // validators
 const { runValidation } = require('../validators');
