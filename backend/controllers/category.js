@@ -20,3 +20,52 @@ exports.create = (req, res) => {
     res.json(data)
   });
 }
+
+/**
+ * GET all categories
+ */
+exports.list = (req, res) => {
+  // {} will return everything
+  Category.find({}).exec((err, data) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err)
+      })
+    }
+
+    res.json(data);
+  })
+}
+
+/**
+ * GET single category
+ */
+exports.read = (req, res) => {
+  const slug = req.params.slug.toLowerCase()
+
+  Category.findOne({slug}).exec((err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err)
+      })
+    }
+
+    res.json(category);
+  })
+}
+
+exports.remove = (req, res) => {
+  const slug = req.params.slug.toLowerCase();
+
+  Category.findOneAndRemove({slug}).exec((err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler(err)
+      })
+    }
+
+    res.json({
+      message: 'Category deleted successfully'
+    });
+  })
+}
