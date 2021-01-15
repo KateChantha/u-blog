@@ -12,13 +12,15 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
+// config with @zeit/next package before importing css file
+import '.././node_modules/nprogress/nprogress.css'
 
 /**
  * https://nextjs.org/docs/api-reference/next/router#routerevents
  */
-Router.onRouteChangeStart = url => NProgress.start();
-Router.onRouteChangeComplete= url => NProgress.done();
-Router.onRouteChangeError = url => NProgress.done();
+Router.routeChangeStart = url => NProgress.start();
+Router.routeChangeComplete= url => NProgress.done();
+Router.routeChangeError = url => NProgress.done();
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
