@@ -1,6 +1,7 @@
 import { useState, Fragment } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
+import NProgress from 'nprogress';
 import { APP_NAME } from '../config';
 import { signout, isAuth } from '../actions/auth';
 import {
@@ -12,7 +13,14 @@ import {
   NavLink
 } from 'reactstrap';
 
-const Header = (props) => {
+/**
+ * https://nextjs.org/docs/api-reference/next/router#routerevents
+ */
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete= url => NProgress.done();
+Router.onRouteChangeError = url => NProgress.done();
+
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
