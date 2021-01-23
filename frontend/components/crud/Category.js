@@ -11,14 +11,15 @@ const Category = () => {
     success: false,
     categories: [],
     removed: false,
+    reload: false,
   })
 
-  const { name, error, success, categories, removed} = values;
+  const { name, error, success, categories, removed, reload} = values;
   const token = getCookie('token');
 
   useEffect(() => {
     loadCategories()
-  }, [])
+  }, [reload])
 
   const loadCategories = () => {
     getCategories().then(data => {
@@ -44,7 +45,7 @@ const Category = () => {
         if (data.error) {
           setValues({ ...values, error: data.error, success: false })
         } else {
-          setValues({ ...values, error: false, success: true, name: '' })
+          setValues({ ...values, error: false, success: false, name: '', removed: !removed, reload: !reload })
         }
       })
   };
