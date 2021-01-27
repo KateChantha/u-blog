@@ -45,7 +45,7 @@ const Tag = () => {
       } else {
         // console.log("deleteTag-data", data)
         // data = {message: Tag deleted succuessfully}
-        setValues({...values, error: false, success: false, name: '', removed: !removed, reload: !reload})
+        setValues({...values, error: false, success: false, name: '', removed: true, reload: !reload})
       }
     })
   }
