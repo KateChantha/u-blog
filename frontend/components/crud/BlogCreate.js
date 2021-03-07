@@ -17,8 +17,9 @@ import { createBlog } from '../../actions/blog';
 import dynamic from 'next/dynamic';
 // so that it can be use only on client side
 // not in the server side
-// const ReactQuill =dynamic(() => import('quill'), { ssr: false });
-// import "../../node_modules/quill/dist/quill.snow.css";
+
+const ReactQuill =dynamic(() => import('quill'), { ssr: false });
+import "../../node_modules/quill/dist/quill.snow.css";
 
 // const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 // import '../../node_modules/react-quill/dist/quill.snow.css';
